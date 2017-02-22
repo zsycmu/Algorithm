@@ -16,6 +16,33 @@
  * @author Shengyi
  *
  */
+// Note: https://segmentfault.com/a/1190000003794831
 public class _274_H_Index {
-
+	public int hIndex(int[] citations) {
+        if (citations == null || citations.length == 0) {
+        	return 0;
+        }
+        
+        int[] stats = new int[citations.length + 1];
+        
+        for (int i = 0; i < citations.length; i++) {
+        	int citation = citations[i];
+        	if (citation < citations.length) {
+        		stats[citation]++;
+        	} else {
+        		stats[citations.length]++;
+        	}
+        }
+        
+        int numberOfPaper = 0;
+        
+        for (int i = stats.length - 1; i >= 0; i--) {
+        	numberOfPaper += stats[i];
+        	if (numberOfPaper >= i) {
+        		return i;
+        	}
+        }
+        
+        return 0;
+    }
 }
