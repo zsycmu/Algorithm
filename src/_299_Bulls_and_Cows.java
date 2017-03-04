@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -23,42 +25,41 @@ import java.util.Map;
  * @author Shengyi
  *
  */
-
+// Do it again.
 public class _299_Bulls_and_Cows {
-	public String getHint(String secret, String guess) {
-        Map<Character, List<Integer>> map = new HashMap<Character, List<Integer>>();
-        
-        for (int i = 0; i < secret.length(); i++) {
-        	char c = secret.charAt(i);
-        	if (map.containsKey(c)) {
-        		List<Integer> list = map.get(c);
-        		list.add(i);
-        		map.put(c, list);
-        	} else {
-        		List<Integer> list = new ArrayList<Integer>();
-        		list.add(i);
-        		map.put(c, list);
-        	}
-        }
-        
-        int a = 0;
-        int b = 0;
-        
-        for (int i = 0; i < guess.length(); i++) {
-        	char c = guess.charAt(i);
-        	if (map.containsKey(c)) {
-        		List<Integer> list = map.get(c);
-        		if (list.contains(i)) {
-        			a++;
-        			list.remove(i);
-        		} else {
-        			if (list.size() != 0) {
-        				b++;
-        			}
-        		}
-        	}
-        }
-        
-        //return a + "A" + b + "B";
+	public static String getHint(String secret, String guess) {
+		int[] m = new int[10];
+		int a = 0;
+		int b = 0;
+		
+		for (int i = 0; i < secret.length(); i++) {
+			char cs = secret.charAt(i);
+			char gs = guess.charAt(i);
+			if (cs == gs) {
+				a++;
+			} else {
+				m[gs - '0']++;
+			}
+		}
+		
+		for (int i = 0; i < secret.length(); i++) {
+			char cs = secret.charAt(i);
+			char gs = guess.charAt(i);
+			if (cs != gs && m[cs - '0'] != 0) {
+				b++;
+				m[cs - '0']--;
+			}
+		}
+		
+		return a + "A" + b + "B";
     }
+	
+	public static void main(String[] args) {
+		String input1 = "1";
+		String input2 = "0";
+		
+		String output = getHint(input1, input2);
+		
+		System.out.println(output);
+	}
 }
