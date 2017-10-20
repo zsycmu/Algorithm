@@ -1,4 +1,16 @@
 eclipse.preferences.version=1
+encoding//src/AmazonOA/AllQuestions.java=UTF-8
+encoding//src/AmazonOA/AnagramString.java=UTF-8
+encoding//src/AmazonOA/BST.java=UTF-8
+encoding//src/AmazonOA/Baseball.java=UTF-8
+encoding//src/AmazonOA/CommonBoss.java=UTF-8
+encoding//src/AmazonOA/Dish.java=UTF-8
+encoding//src/AmazonOA/EasyQuestions.java=UTF-8
+encoding//src/AmazonOA/Fruit_CheckWinner.java=UTF-8
+encoding//src/AmazonOA/GolfEvent.java=UTF-8
+encoding//src/AmazonOA/ItemAssociation.java=UTF-8
+encoding//src/AmazonOA/Movie.java=UTF-8
+encoding//src/AmazonOA/Truck.java=UTF-8
 encoding//src/Test/Test.java=UTF-8
 encoding//src/_201_Bitwise_AND_of_Numbers_Range.java=UTF-8
 encoding//src/_209_Minimum_Size_Subarray_Sum.java=UTF-8
