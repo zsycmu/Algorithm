@@ -1,5 +1,7 @@
 package AmazonOA;
 
+import Util.TreeNode;
+
 /**
  * 
  * 第二題BST find 2 nodes distance
@@ -106,5 +108,18 @@ values= [5,6,3,1,2,4], n is the size of values, node1 is 2, node2 is 4, then fun
  */
 
 public class BST {
-
+	public static int bstDistance(int[] values, int n, int node1, int node2) {
+		if (values == null || values.length == 0) {
+			return 0;
+		}
+		
+		TreeNode root = values[0];
+		for (int i = 1; i < values.length; i++) {
+			create(root, values[i]);
+		}
+	}
+	
+	private void create(TreeNode root, int val){
+		
+	}
 }

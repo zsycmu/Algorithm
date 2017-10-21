@@ -21,5 +21,7 @@ Expected output: {{"Peter", "Pizza"}, {"Peter", "Pasta"}, {"Peter", "Burger"}}
  */
 
 public class Dish {
-
+	public recommend(String[][] memu, String[][] personPreferences) {
+		
+	}
 }

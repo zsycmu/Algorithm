@@ -1,5 +1,9 @@
 package AmazonOA;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
 /**
  * 
  * 卡车那道, 求K 个最近的距离的位置.
@@ -10,7 +14,7 @@ package AmazonOA;
  * 把地里的题都准备了，但是却遇见了两个新题。题目都不难，但是题目好长啊，理解一下题意10min过去了
 第一题，Amazon warehouse。。。其实就是给你x,y 然后算x,y 到原点的距离，输出最小的几个，java应该priorityqueue就够了，我用的python，也还可以。. 鐣欏鐢宠璁哄潧-涓
 
-
+是 warehouse送卡车.  N个仓库, M个目的地, 一个N size的List表示坐标. 输出M个坐标.  算sqrt,输出最小的M个就好了.  我就算sqft然后sort一下就好. N个地点List<Integer> M<N 列出最近的M个位置
  *
  *
  * *
@@ -23,6 +27,66 @@ Amazon warehouse。。。其实就是给你x,y 然后算x,y 到原点的距离�
  * @author Shengyi
  *
  */
+
+//参数：
+//int N, 代表总共有N 个地点
+//List<List<Integer>> 地点的坐标
+//int M,代表需要送的crate数量
+//
+//output：一个List<List<Integer>> 代表送货的地点坐标x,y
+//其实就是让你计算距离卡车最近的M个地点.
+//
+//需要注意点是题目里面没有给卡车的位置，根据给的例子猜出是原点（0，0）
+//例1：N = 3, M = 2, List<List<Ingeter>> 是 [[2,3][3,4],[1,-3]].鏈枃鍘熷垱鑷�1point3acres璁哄潧
+//output: [[2,3],[1,-3]]
+//. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+//例2： N=3， M=6， List<List<Integer>> 是[[1,8],[2,4],[8,9],[5,3],[2,7],[3,5]]
+//output: [[2,4],[5,3],[3,5]]
+
 public class Truck {
+	private int findDistance(List<Integer> a) {
+		return a.get(0) * a.get(0) + a.get(1) * a.get(1);
+	}
+	public static List<List<Integer>> closestPoint(List<List<Integer>> location, int N,  int M) {
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+ 		if (location == null || N == 0 || M > N) {
+			return result;
+		}
+
+		PriorityQueue<List<Integer>> q = new PriorityQueue<List<Integer>>(N, new Comparator<List<Integer>>() {
+			public int compare(List<Integer> a, List<Integer> b){
+				return findDistance(a) - findDistance(b);
+			}
+		});
+		
+		for (List<Integer> a : location) {
+			q.offer(a);
+		}
+		
+		for (int i = 0; i < M; i++) {
+			result.add(q.poll());
+		}
+		
+		return result;
+	}
+	
+	
+	public static Point[] closestPoint2(Point[] array, final Point origin, int k)
+    {
+        if(k > array.length) return array;
+        Point[] res = new Point[k];
+        PriorityQueue<Point> queue = new PriorityQueue<Point>(new Comparator<Point>()
+        {
+            @Override
+            public int compare(Point a, Point b)
+            {
+                return -Double.compare(distance(a, origin), distance(b, origin));//??????????????????????????????????
+            }
+        });
+        for(Point p: array) queue.offer(p);
+        while(queue.size() > k) queue.poll();
+        for(int i = 0; i < k; i++) res[k - 1 - i] = queue.poll();//????????????????????????????????
+        return res;
+    }
 
 }
