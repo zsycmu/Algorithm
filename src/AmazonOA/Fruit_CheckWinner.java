@@ -107,14 +107,22 @@ public class Fruit_CheckWinner {
 		}
 		
 		if (code.size() > shoppingCart.size()) {
-			return -1;
+			return 0;
 		}
 		
 		for (int i = 0; i < shoppingCart.size() - code.size() + 1; i++) {
 			int start = 0;
 			int index = i;
 			while(start < code.size()) {
-				if (code.get(start).equals(shoppingCart.get(index))) {
+				while (code.get(start) == null) {
+					start++;
+				}
+				
+				while (shoppingCart.get(index) == null) {
+					index++;
+				}
+				
+				if (code.get(start).equals(shoppingCart.get(index)) || code.get(start).equals("anything")) {
 					start++;
 					index++;
 				} else {

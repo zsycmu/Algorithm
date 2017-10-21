@@ -30,7 +30,7 @@ public class MovieNetwork {
 		
 		//注意要抛出输入电影本身 ，compare rate时候 类型是float 
 		PriorityQueue<Movie>  q = new PriorityQueue<Movie>(k, new Comparator<Movie>() {
-			public int compare(Movie a, Movie b) {
+			public float compare(Movie a, Movie b) {
 				return (int)(a.rating - b.rating);
 			}//从小到大
 			
