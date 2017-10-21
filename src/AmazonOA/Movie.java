@@ -1,5 +1,8 @@
 package AmazonOA;
 
+import java.util.List;
+import java.util.PriorityQueue;
+
 /**
  * 
  * 相似的电影那道. 说白了就是找出一个图中K个有最高评价的结点
@@ -56,7 +59,57 @@ update: 应该返回 m5 (只有有一条路径从 m1到 m5, 并且 5是最大的
  * @author Shengyi
  *
  */
-
-public class Movie {
-
+//class Movie
+//{
+//   int movieId;
+//   float rating;
+//   List<Movie> similarMovies;
+////还有其他的getters. visit 1point3acres.com for more.
+//}
+public class Movieh {
+	public List<Movie> findTopK(Movie m, int k) {
+		List<Movie> result = new ArrayList<Movie>();
+		
+		if (Movie == null) {
+			return result;
+		}
+		//注意要抛出输入电影本身 ，compare rate时候 类型是float 
+		PriorityQueue<Movie>  q = new PriorityQueue<Movie>(k, new Comparator<Movie>() {
+			public float comare(Movie a, Movie b) {
+				return a.rating - b.rating;
+			}//从小到大
+		});
+		
+		Queue<Movie> similar = new LinkedList<Movie>;
+		similar.offer(m);
+		
+		while (!similar.isEmpty()) {
+			Movie temp = similar.poll();
+			
+			for (int i = 0; i < temp.similarMovies.size(); i++) {
+				Movie neigbor = temp.similarMovies.get(i);
+				if (!similar.contains(neigbor)) {
+					similar.offer(neigbor);
+				}
+				
+				if (neigbor != m && !q.contains(neigbor)) {
+					if (q.size() < k) {// mean not self 
+						q.offer(neigbor);
+					} else {
+						if (neigbor.rating > q.peek().rating) {
+							q.poll();
+							q.offer(neigbor);
+						}
+					}
+				}
+				
+			}
+		}
+		
+		for (Movie m : q) {
+			result.add(m);
+		}
+		
+		return result;
+	}
 }

@@ -1,5 +1,8 @@
 package AmazonOA;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * 买水果题 checkWinner(List<List<String>>codeList, List<String> shoppingcart) . 鍥磋鎴戜滑@1point 3 acres
@@ -87,6 +90,86 @@ codeList中会有anything，可以匹配任意值，但能且只能匹配一个�
  *
  */
 
-public class Fruit_CheckWinner {
 
+public class Fruit_CheckWinner {
+	public static int checkWinner (List<List<String>> codeList, List<String> shoppingCart) {
+		if (codeList == null || codeList.size() == 0 || shoppingCart == null || shoppingCart.size() == 0) {
+			return 0;
+		}
+		
+		List<String> code = new ArrayList<String>();
+		
+		for (int i = 0; i < codeList.size(); i++) {
+			List<String> temp = new ArrayList<String>(codeList.get(i));
+			for (int j = 0; j < temp.size(); j++) {
+				code.add(temp.get(j));
+			}
+		}
+		
+		if (code.size() > shoppingCart.size()) {
+			return -1;
+		}
+		
+		for (int i = 0; i < shoppingCart.size() - code.size() + 1; i++) {
+			int start = 0;
+			int index = i;
+			while(start < code.size()) {
+				if (code.get(start).equals(shoppingCart.get(index))) {
+					start++;
+					index++;
+				} else {
+					break;
+				}
+			}
+			
+			if (start == code.size()) {
+				return 1;
+			} 
+		}
+		
+		return 0;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
