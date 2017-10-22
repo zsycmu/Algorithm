@@ -1,11 +1,14 @@
-package AmazonOA;
+package OA;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
+
 
 class Movie
 {
@@ -49,14 +52,19 @@ public class MovieNetwork {
 	
 		Queue<Movie> similar = new LinkedList<Movie>();
 		similar.offer(m);
+		Set<Integer> visited = new HashSet<Integer>();
+		visited.add(m.getId());
 		
 		while (!similar.isEmpty()) {
+			
 			Movie temp = similar.poll();
 			
 			for (int i = 0; i < temp.getSimilar().size(); i++) {
 				Movie neigbor = temp.getSimilar().get(i);
-				if (neigbor != m && !similar.contains(neigbor)) {
+				
+				if (neigbor != m && !similar.contains(neigbor) && !visited.contains(neigbor.getId())) {
 					similar.offer(neigbor);
+					visited.add(neigbor.getId());
 				}
 				
 				if (neigbor != m && !q.contains(neigbor)) {
@@ -100,12 +108,12 @@ public class MovieNetwork {
 		
 		f.getSimilar().add(h);
 		f.getSimilar().add(a);
-		
+		f.getSimilar().add(b);
 		f.getSimilar().add(g);
 		
 		
 		
-		List<Movie> result = test.findTopK(a,4);
+		List<Movie> result = test.findTopK(a,3);
 		
 		for (Movie m : result) {
 			System.out.print(m.getId());

@@ -1,7 +1,8 @@
-package AmazonOA;
+package OA;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 class Employee {
 	int id;
@@ -15,10 +16,6 @@ class Employee {
 	}
 
 }
-//寻找公司员工的最低共同上司
-//ceo 不是 manager 如果共同上司是 ceo return null
-//员工可能不在这个公司 return null.
-
 public class CompanyTree {
 	public static Employee findCommonManager(Employee ceo, Employee a, Employee b) {
 		if (ceo == null || a == null || b == null || a == ceo || b == ceo) {

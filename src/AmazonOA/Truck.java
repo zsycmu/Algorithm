@@ -1,6 +1,8 @@
 package AmazonOA;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
@@ -44,12 +46,9 @@ Amazon warehouse。。。其实就是给你x,y 然后算x,y 到原点的距离�
 //output: [[2,4],[5,3],[3,5]]
 
 public class Truck {
-	private int findDistance(List<Integer> a) {
-		return a.get(0) * a.get(0) + a.get(1) * a.get(1);
-	}
 	public static List<List<Integer>> closestPoint(List<List<Integer>> location, int N,  int M) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
- 		if (location == null || N == 0 || M > N) {
+ 		if (location == null || N == 0) {
 			return result;
 		}
 
@@ -64,29 +63,40 @@ public class Truck {
 		}
 		
 		for (int i = 0; i < M; i++) {
-			result.add(q.poll());
+			if (!q.isEmpty()) {
+				result.add(q.poll());
+			}
 		}
 		
 		return result;
 	}
 	
+	private static int findDistance(List<Integer> a) {
+		return a.get(0) * a.get(0) + a.get(1) * a.get(1);
+	}
 	
-	public static Point[] closestPoint2(Point[] array, final Point origin, int k)
-    {
-        if(k > array.length) return array;
-        Point[] res = new Point[k];
-        PriorityQueue<Point> queue = new PriorityQueue<Point>(new Comparator<Point>()
-        {
-            @Override
-            public int compare(Point a, Point b)
-            {
-                return -Double.compare(distance(a, origin), distance(b, origin));//??????????????????????????????????
-            }
-        });
-        for(Point p: array) queue.offer(p);
-        while(queue.size() > k) queue.poll();
-        for(int i = 0; i < k; i++) res[k - 1 - i] = queue.poll();//????????????????????????????????
-        return res;
-    }
+	public static void main(String[] args) {
 
+		List<List<Integer>> input = new ArrayList<List<Integer>>();
+
+
+		input.add(Arrays.asList(1,1));
+
+		input.add(Arrays.asList(1,2));
+
+		input.add(Arrays.asList(1,3));
+
+		input.add(Arrays.asList(1,4));
+
+		input.add(Arrays.asList(1,1));
+
+		input.add(Arrays.asList(1,1));
+
+		input.add(Arrays.asList(1,1));
+
+
+		System.out.println(closestPoint(input, input.size(), 5));
+
+
+		}
 }
