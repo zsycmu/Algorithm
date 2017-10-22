@@ -10,16 +10,14 @@ public class BST {
 			return -1;
 		}
 		
-		if (!Arrays.asList(values).contains(node1) || !Arrays.asList(values).contains(node2)) {
+		if (!contains(values, node1) || !contains(values, node2)) {
 			return -1;
 		}
 		TreeNode root = generateTree(values);
 		TreeNode LCA = findLCA(root, node1, node2);
-//		int distNode1 = findDist(root, node1); 
-//		int distNode2 = findDist(root, node2);
 		int distNode1 = findDist(LCA, node1); 
 		int distNode2 = findDist(LCA, node2);
-		//int distLCA = findDist(root, LCA.val);
+
 		
 		//return distNode1 + distNode2 - 2 * distLCA;
 		return distNode1 + distNode2;
@@ -66,7 +64,7 @@ public class BST {
 		}
 	}
 	
-    public static TreeNode findLCA(TreeNode root, int val1, int val2) {
+    private static TreeNode findLCA(TreeNode root, int val1, int val2) {
         if(root == null) {
         	System.out.println(3);
             return null; 
@@ -80,30 +78,26 @@ public class BST {
             return root;
         }    
     }
-	 
+	
+    private static boolean contains(int[] values, int node) {
+    	for (int i = 0; i < values.length; i++) {
+    		if (values[i] == 1) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
+    }
 	public static void main(String[] args) {
-
 		 //int[] input = {5,6,3,1,2,4};
-
 		 int[] input = {1};
 		 TreeNode node = generateTree(input);
-
 		 TreeNode lca = findLCA(node, 1, 1);
-
-
-		 System.out.println(lca.val);
-
-
-
+		 //System.out.println(lca.val);
 		 //System.out.println(getDistance(lca, 2));
-
-
-
 		 //System.out.println(getDistance(lca, 6));
+		 System.out.println(bstDistance(input, 1, 1, 1));
 
-
-
-		 System.out.println(bstDistance(input, 6, 4, 9));
-
-		 }
+	 }
+	
 }
